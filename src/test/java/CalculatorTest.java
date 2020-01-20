@@ -2,7 +2,9 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.*;
@@ -13,23 +15,50 @@ public class CalculatorTest {
 
     private Calculator calculator;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @Before
     public void setup() {
         calculator = new Calculator();
     }
 
-    @Test
-    public void testCalculateIncome(){
-        //when
-        int grossIncome = 10000;
-        int tax = 19;
 
-        //given
-        double result = calculator.calculateIncome(grossIncome, tax);
+    @Test(expected = IllegalArgumentException.class)
+    public void testThrowIAEWithTestParameter() {
 
-        //then
-        assertEquals(8100.0, result,0);
+        calculator.calculate(null, 2);
     }
+
+    @Test
+    public void testCalculateThrowIAEWhenParamIsNull() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Parametr nie może być nullem!");
+
+        calculator.calculate(null, 2);
+    }
+
+    @Test
+    public void testThrowIAEWithRuleAnnotation() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Parametr nie może być nullem!");
+
+        calculator.calculate(null, 2);
+    }
+
+    @Test
+    public void testThrowIAEWhenAEqualsZero(){
+        try {
+            calculator.calculate(null, 2);
+            fail();
+        } catch (Exception e) {
+            assertThat(e)
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Parametr nie może być nullem!");
+        }
+    }
+
+
 
     @Test
     public void testCalculate(){

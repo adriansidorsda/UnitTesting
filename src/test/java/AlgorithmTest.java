@@ -31,14 +31,6 @@ public class AlgorithmTest {
         assertEquals(expected, result);
     }
 
-    @Test
-    public void testReverse() {
-        //given
-
-        //when
-
-        //then
-    }
 
     public Object[] generateData() {
         return new Object[]{
@@ -48,30 +40,6 @@ public class AlgorithmTest {
         };
     }
 
-
-//    @Test
-//    public void findMinPositiveWhen1() {
-//        //given
-//        List<Integer> list = null;
-//
-//        //when
-//        int result = algorithm.findMinPositiveNumberWhichNotExistsInList(list);
-//
-//        //then
-//        assertEquals(1, result);
-//    }
-//
-//    @Test
-//    public void findMinPositiveWhen2() {
-//        //given
-//        List<Integer> list = Collections.EMPTY_LIST;
-//
-//        //when
-//        int result = algorithm.findMinPositiveNumberWhichNotExistsInList(list);
-//
-//        //then
-//        assertEquals(1, result);
-//    }
 
     @Test
     public void findMinPositiveWhen3() {
